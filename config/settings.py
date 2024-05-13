@@ -34,8 +34,9 @@ THIRD_PARTY_APPS = []
 
 CUSTOM_APPS = [
     "users.apps.UsersConfig",
-    "common.apps.CommonModel",
+    "common.apps.CommonConfig",
     "reviews.apps.ReviewsConfig",
+    "medicines.apps.MedicinesConfig",
 ]
 
 SYSTEM_APPS = [
