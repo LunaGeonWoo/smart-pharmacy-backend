@@ -8,6 +8,11 @@ class Review(CommonModel):
         on_delete=models.CASCADE,
         related_name="reviews",
     )
+    medicine = models.ForeignKey(
+        "medicines.Medicine",
+        on_delete=models.CASCADE,
+        related_name="reviews",
+    )
     detail = models.TextField()
 
     def __str__(self) -> str:
