@@ -6,16 +6,18 @@ from .models import User
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
-        "Profile",
-        {
-            "fields": (
-                "username",
-                "password",
-                "name",
-                "email",
-            ),
-            "classes": ("wide",),
-        },
+        (
+            "Profile",
+            {
+                "fields": (
+                    "username",
+                    "password",
+                    "name",
+                    "email",
+                ),
+                "classes": ("wide",),
+            },
+        ),
         (
             "Permissions",
             {

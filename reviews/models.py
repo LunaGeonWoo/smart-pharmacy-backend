@@ -16,4 +16,4 @@ class Review(CommonModel):
     detail = models.TextField()
 
     def __str__(self) -> str:
-        return self.detail
+        return f"{self.user.name} / {self.medicine.name}"

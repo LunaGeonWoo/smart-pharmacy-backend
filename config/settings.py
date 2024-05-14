@@ -37,6 +37,7 @@ CUSTOM_APPS = [
     "common.apps.CommonConfig",
     "reviews.apps.ReviewsConfig",
     "medicines.apps.MedicinesConfig",
+    "receipts.apps.ReceiptsConfig",
 ]
 
 SYSTEM_APPS = [
