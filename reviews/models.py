@@ -13,7 +13,12 @@ class Review(CommonModel):
         on_delete=models.CASCADE,
         related_name="reviews",
     )
-    detail = models.TextField()
+    detail = models.TextField(
+        verbose_name="Comment",
+    )
 
     def __str__(self) -> str:
-        return f"{self.user.name} / {self.medicine.name}"
+        return self.created_at.strftime("%Y년 %m월 %d일 %H시 %M분 %S초")
+
+    def __str__(self) -> str:
+        return f"{self.user.username}님의 리뷰 ({self.medicine.name})"

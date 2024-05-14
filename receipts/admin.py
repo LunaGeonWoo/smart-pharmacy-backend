@@ -4,4 +4,15 @@ from .models import Receipt
 
 @admin.register(Receipt)
 class ReceiptAdmin(admin.ModelAdmin):
-    pass
+
+    list_display = (
+        "medicine",
+        "user",
+    )
+
+    list_filter = (
+        "medicine",
+        "created_at",
+    )
+
+    readonly_fields = ("created_at",)

@@ -6,5 +6,13 @@ from .models import Review
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
         "__str__",
+        "created_at",
         "detail",
     )
+
+    list_filter = (
+        "medicine",
+        "created_at",
+    )
+
+    readonly_fields = ("created_at",)
