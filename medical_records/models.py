@@ -6,6 +6,7 @@ class Record(CommonModel):
 
     name = models.CharField(
         max_length=150,
+        verbose_name="symptom",
     )
 
     user = models.ForeignKey(
@@ -18,6 +19,7 @@ class Record(CommonModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
+        verbose_name="medicine",
     )
 
     def __str__(self) -> str:
