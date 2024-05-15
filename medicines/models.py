@@ -3,10 +3,20 @@ from common.models import CommonModel
 
 
 class Medicine(CommonModel):
+    serial_number = models.PositiveBigIntegerField(
+        unique=0,
+    )
     name = models.CharField(
         max_length=150,
     )
-    serial_number = models.PositiveBigIntegerField()
+    company = models.CharField(
+        default="",
+        max_length=150,
+    )
+    main_ingredient = models.TextField(
+        default="",
+        blank=True,
+    )
     efficacy = models.TextField(
         default="",
         blank=True,

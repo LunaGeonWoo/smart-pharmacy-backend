@@ -1,0 +1,17 @@
+import pandas as pd
+from medicines.models import Medicine
+df = pd.read_excel("e약은요정보검색.xlsx").fillna("")
+for i in range(len(df)):
+    Medicine.objects.create(
+        serial_number=df.iloc[i].values[0],
+        name=df.iloc[i].values[1],
+        company=df.iloc[i].values[2],
+        main_ingredient=df.iloc[i].values[3],
+        efficacy=df.iloc[i].values[4],
+        usage=df.iloc[i].values[5],
+        need_to_know=df.iloc[i].values[6],
+        cautions=df.iloc[i].values[7],
+        beware_food=df.iloc[i].values[8],
+        side_effect=df.iloc[i].values[9],
+        how_to_store=df.iloc[i].values[10],
+    )
