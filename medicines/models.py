@@ -1,5 +1,6 @@
 from django.db import models
 from common.models import CommonModel
+from django.core import validators
 
 
 class Medicine(CommonModel):
@@ -55,6 +56,11 @@ class Medicine(CommonModel):
         default="",
         blank=True,
         verbose_name="이 약은 어떻게 보관해야 합니까?",
+    )
+    price = models.PositiveIntegerField(
+        default=0,
+        validators=[validators.MinValueValidator(0)],
+        verbose_name="가격",
     )
 
     def __str__(self) -> str:
