@@ -31,6 +31,6 @@ class ReceiptsDetail(APIView):
             raise NotFound
 
     def get(self, request, pk):
-        medicine = self.get_object(pk)
-        serializer = serializers.ReceiptDetailSerialzier(medicine)
+        receipt = self.get_object(pk)
+        serializer = serializers.ReceiptDetailSerialzier(receipt)
         return Response(serializer.data)
