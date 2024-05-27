@@ -4,7 +4,7 @@ GET pharmacy/medicines
 
 - 약 보기, 가격
 
-GET pharmacy/medicinces/1
+GET pharmacy/medicines/1
 
 - 자세한 약 정보, 가격
 

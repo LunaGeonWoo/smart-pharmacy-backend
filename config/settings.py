@@ -48,6 +48,7 @@ CUSTOM_APPS = [
     "medicines.apps.MedicinesConfig",
     "receipts.apps.ReceiptsConfig",
     "medical_records.apps.MedicalRecordsConfig",
+    "carts.apps.CartsConfig",
 ]
 
 SYSTEM_APPS = [
