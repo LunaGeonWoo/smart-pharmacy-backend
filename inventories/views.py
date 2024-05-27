@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
-# Create your views here.
+
+class Inventories(APIView):
+    authentication_classes = [IsAuthenticated]
+
+    def get(self, pk):
+        pass
