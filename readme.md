@@ -32,16 +32,16 @@ GET DELETE pharmacy/diagnosis/1
 
 #
 
-### inventories
+### inventories [✔]
 
-- GET POST pharmacy/inventories [✅]
+- GET POST pharmacy/inventories [✔]
 
 | Params   | Description | Division      |
 | -------- | ----------- | ------------- |
 | medicine | int: pk     | **Essential** |
 | quantity | int: >=0    | **Essential** |
 
-- PUT DELETE pharmacy/inventories/1 [✅]
+- PUT DELETE pharmacy/inventories/1 [✔]
 
 | Params   | Description | Division     |
 | -------- | ----------- | ------------ |
