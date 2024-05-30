@@ -1,14 +1,6 @@
 ### Medicines
 
-GET pharmacy/medicines
-
-- 약 보기, 가격
-
-GET pharmacy/medicines/1
-
-- 자세한 약 정보, 가격
-
-GET POST pharmacy/medicines/1/reviews
+- GET POST pharmacy/medicines/1/reviews
 
 - 리뷰 페이지
 
@@ -18,15 +10,7 @@ GET PUT DELETE pharmacy/medicines/1/reviews/1
 
 #
 
-### receipts
-
-GET pharmacy/receipts
-
-- 구매내역 간단히
-
-GET pharmacy/receipts/1
-
-- 더 자세한 정보
+### receipts [✔]
 
 #
 
