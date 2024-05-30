@@ -50,5 +50,5 @@ GET DELETE pharmacy/diagnosis/1
 
 ### inventories
 
-- GET pharmacy/inventories [❌]
-- PUT DELETE pharmacy/inventories/medicines/1?quantity=1
+- GET POST pharmacy/inventories [❌]
+- PUT DELETE pharmacy/inventories/1
