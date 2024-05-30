@@ -48,7 +48,7 @@ GET DELETE pharmacy/diagnosis/1
 
 #
 
-### carts
+### inventories
 
-GET pharmacy/carts
-PUT DELETE pharmacy/carts/medicines/1?quantity=1
+- GET pharmacy/inventories [❌]
+- PUT DELETE pharmacy/inventories/medicines/1?quantity=1
