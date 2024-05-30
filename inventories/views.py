@@ -39,3 +39,26 @@ class Inventories(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+
+
+class InventoryDetail(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return Inventory.objects.get(pk=pk)
+        except Inventory.DoesNotExist:
+            raise exceptions.NotFound
+
+    def put(self, request, pk):
+        inventory = self.get_object(pk)
+        serializer = InventorySerializer(
+            inventory,
+            data=request.data,
+        )
+        if serializer.is_valid():
+            inventory = serializer.save()
+            serializer = InventorySerializer(inventory)
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
