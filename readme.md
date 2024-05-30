@@ -51,4 +51,10 @@ GET DELETE pharmacy/diagnosis/1
 ### inventories
 
 - GET POST pharmacy/inventories [❌]
+
+| params   | description |
+| -------- | ----------- |
+| medicine | int: pk     |
+| quantity | int > 0     |
+
 - PUT DELETE pharmacy/inventories/1
