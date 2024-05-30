@@ -32,5 +32,5 @@ class ReceiptsDetail(APIView):
 
     def get(self, request, pk):
         receipt = self.get_object(pk)
-        serializer = serializers.ReceiptDetailSerialzier(receipt)
+        serializer = serializers.ReceiptDetailSerializer(receipt)
         return Response(serializer.data)

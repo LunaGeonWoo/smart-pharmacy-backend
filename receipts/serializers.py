@@ -16,7 +16,7 @@ class ReceiptSerializer(serializers.ModelSerializer):
         )
 
 
-class ReceiptDetailSerialzier(serializers.ModelSerializer):
+class ReceiptDetailSerializer(serializers.ModelSerializer):
 
     medicine = MedicineDetailSerializer()
 
