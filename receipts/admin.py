@@ -7,9 +7,10 @@ class ReceiptAdmin(admin.ModelAdmin):
 
     list_display = (
         "medicine",
+        "quantity",
         "owner",
     )
 
     list_filter = ("medicine",)
 
-    readonly_fields = ("created_at",)
+    readonly_fields = ("purchase_at",)

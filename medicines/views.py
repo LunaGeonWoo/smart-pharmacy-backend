@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from .models import Medicine
 from . import serializers
-from reviews.serializers import ReviewSerializer, ReviewDetailSerialzier
+from reviews.serializers import ReviewSerializer
 from reviews.models import Review
 
 
@@ -12,7 +12,7 @@ class Medicines(APIView):
 
     def get(self, request):
         all_medicines = Medicine.objects.all()
-        serializer = serializers.MedicineSerializer(
+        serializer = serializers.MedicineTinySerializer(
             all_medicines,
             many=True,
         )
@@ -81,5 +81,5 @@ class ReviewDetail(APIView):
     def get(self, request, pk, pk2):
         review = self.get_object(pk)
         medicine = self.get_object_2(pk2)
-        serializer = serializers.ReviewDetailSerialzier(review, medicine)
+        serializer = serializers.ReviewDetailSerializer(review, medicine)
         return Response(serializer.data)

@@ -1,18 +1,22 @@
-from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from .models import Receipt
-from medicines.models import Medicine
 from medicines.serializers import MedicineDetailSerializer
 
 
 class ReceiptSerializer(serializers.ModelSerializer):
+    medicine = serializers.SerializerMethodField()
+
     class Meta:
         model = Receipt
         fields = (
             "id",
             "medicine",
-            "created_at",
+            "quantity",
+            "purchase_at",
         )
+
+    def get_medicine(self, receipt):
+        return receipt.medicine.name
 
 
 class ReceiptDetailSerializer(serializers.ModelSerializer):
@@ -21,7 +25,4 @@ class ReceiptDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Receipt
-        exclude = (
-            "owner",
-            "updated_at",
-        )
+        exclude = ("owner",)

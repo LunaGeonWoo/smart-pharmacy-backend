@@ -1,11 +1,9 @@
-from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from .models import Medicine
-from reviews.serializers import *
 from reviews.models import Review
 
 
-class MedicineSerializer(serializers.ModelSerializer):
+class MedicineTinySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Medicine
@@ -34,7 +32,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         )
 
 
-class ReviewDetailSerialzier(serializers.ModelSerializer):
+class ReviewDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
