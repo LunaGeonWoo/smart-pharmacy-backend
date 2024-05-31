@@ -14,7 +14,9 @@ class Inventory(CommonModel):
         on_delete=models.CASCADE,
         related_name="inventory",
     )
-    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+    quantity = models.PositiveIntegerField(
+        validators=[MinValueValidator(1)],
+    )
 
     def __str__(self):
         return f"{self.owner.username}의 {self.medicine.name} {self.quantity}개"
