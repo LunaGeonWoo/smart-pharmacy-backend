@@ -12,12 +12,13 @@ class Receipt(CommonModel):
         on_delete=models.SET_DEFAULT,
         default=1,
         verbose_name="약",
+        related_name="receipts",
     )
-
-    user = models.ForeignKey(
+    owner = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
         verbose_name="환자",
+        related_name="receipts",
     )
 
     def get_purchase_time(self):
@@ -26,4 +27,4 @@ class Receipt(CommonModel):
         )
 
     def __str__(self) -> str:
-        return f"{self.medicine.name} / {self.user.name}"
+        return f"{self.medicine.name} / {self.owner.name}"

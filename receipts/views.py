@@ -1,20 +1,20 @@
 from rest_framework.views import APIView
 from django.conf import settings
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
+from rest_framework import exceptions
 from .models import Receipt
 from . import serializers
 
 
 class Receipts(APIView):
 
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        all_receipts = Receipt.objects.all()
+        my_receipts = Receipt.objects.filter(owner=request.user)
         serializer = serializers.ReceiptSerializer(
-            all_receipts,
+            my_receipts,
             many=True,
         )
         return Response(serializer.data)
@@ -22,15 +22,17 @@ class Receipts(APIView):
 
 class ReceiptsDetail(APIView):
 
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
             return Receipt.objects.get(pk=pk)
         except Receipt.DoesNotExist:
-            raise NotFound
+            raise exceptions.NotFound
 
     def get(self, request, pk):
         receipt = self.get_object(pk)
+        if receipt.owner != request.user:
+            raise exceptions.PermissionDenied
         serializer = serializers.ReceiptDetailSerializer(receipt)
         return Response(serializer.data)

@@ -10,7 +10,6 @@ class ReceiptSerializer(serializers.ModelSerializer):
         model = Receipt
         fields = (
             "id",
-            "user",
             "medicine",
             "created_at",
         )
@@ -22,4 +21,7 @@ class ReceiptDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Receipt
-        fields = "__all__"
+        exclude = (
+            "owner",
+            "updated_at",
+        )
