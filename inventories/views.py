@@ -1,7 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import InventoriesSerializer
+from rest_framework import status
+from rest_framework import exceptions
+from .serializers import InventorySerializer
 from .models import Inventory
 
 
@@ -10,7 +12,7 @@ class Inventories(APIView):
 
     def get(self, request):
         my_inventories = Inventory.objects.filter(owner=request.user)
-        serializer = InventoriesSerializer(
+        serializer = InventorySerializer(
             my_inventories,
             many=True,
         )
@@ -24,7 +26,10 @@ class Inventories(APIView):
             except:
                 raise exceptions.ParseError
             medicine = self.get_medicine(medicine_pk)
-            inventory = serializer.save(medicine=medicine, owner=request.user)
+            inventory = serializer.save(
+                medicine=medicine,
+                owner=request.user,
+            )
             serializer = InventorySerializer(inventory)
             return Response(serializer.data)
         else:
@@ -42,6 +47,8 @@ class InventoryDetail(APIView):
 
     def put(self, request, pk):
         inventory = self.get_object(pk)
+        if inventory.owner != request.user:
+            raise exceptions.PermissionDenied
         serializer = InventorySerializer(
             inventory,
             data=request.data,
@@ -52,3 +59,10 @@ class InventoryDetail(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+
+    def delete(self, request, pk):
+        inventory = self.get_object(pk)
+        if inventory.owner != request.user:
+            raise exceptions.PermissionDenied
+        inventory.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

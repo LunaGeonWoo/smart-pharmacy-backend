@@ -3,7 +3,7 @@ from .models import Inventory
 from medicines.serializers import MedicineTinySerializer
 
 
-class InventoriesSerializer(ModelSerializer):
+class InventorySerializer(ModelSerializer):
     medicine = MedicineTinySerializer()
 
     class Meta:

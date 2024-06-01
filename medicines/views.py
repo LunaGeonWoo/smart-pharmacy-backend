@@ -33,7 +33,7 @@ class MedicineDetail(APIView):
         return Response(serializer.data)
 
 
-class Reviews(APIView):
+class MedicineReviews(APIView):
 
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -62,7 +62,7 @@ class Reviews(APIView):
             return Response(serializer.data)
 
 
-class ReviewDetail(APIView):
+class MedicineReviewDetail(APIView):
 
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -72,14 +72,14 @@ class ReviewDetail(APIView):
         except Review.DoesNotExist:
             raise NotFound
 
-    def get_object_2(self, pk2):
+    def get_medicine(self, pk2):
         try:
             return Medicine.objects.get(pk2=pk2)
         except Medicine.DoesNotExist:
             raise NotFound
 
-    def get(self, request, pk, pk2):
+    def get(self, request, pk, review_pk):
         review = self.get_object(pk)
-        medicine = self.get_object_2(pk2)
+        medicine = self.get_medicine(review_pk)
         serializer = serializers.ReviewDetailSerializer(review, medicine)
         return Response(serializer.data)
