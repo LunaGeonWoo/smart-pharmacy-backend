@@ -122,9 +122,25 @@
 
 ## Medicines
 
-### `[GET] /medicines` []
+### `[GET] /medicines` [✔]
 
-- 약 보기, 가격
+> Request
+
+| _Params_ | Description |
+| -------- | ----------- |
+| page     | int >=1     |
+
+> Response
+
+| Data(Many) | Description    |
+| ---------- | -------------- |
+| medicine   | **_medicine_** |
+
+| **_medicine_** | Description |
+| -------------- | ----------- |
+| name           | str         |
+| company        | str         |
+| price          | int         |
 
 ### `[GET] /medicines/1` []
 

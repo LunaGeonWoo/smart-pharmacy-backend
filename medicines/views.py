@@ -1,9 +1,11 @@
+from django.shortcuts import redirect
+from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
-from .models import Medicine
 from . import serializers
+from .models import Medicine
 from reviews.serializers import ReviewSerializer
 from reviews.models import Review
 
@@ -11,11 +13,18 @@ from reviews.models import Review
 class Medicines(APIView):
 
     def get(self, request):
-        all_medicines = Medicine.objects.all()
-        serializer = serializers.MedicineTinySerializer(
-            all_medicines,
-            many=True,
-        )
+        try:
+            page = int(request.query_params.get("page", 1))
+            page_size = settings.PAGE_SIZE
+            start = (page - 1) * page_size
+            end = start + page_size
+            medicines = Medicine.objects.all()[start:end]
+            serializer = serializers.MedicineTinySerializer(
+                medicines,
+                many=True,
+            )
+        except:
+            return redirect(f"{request.path}?page=1")
         return Response(serializer.data)
 
 
