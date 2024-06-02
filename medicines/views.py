@@ -76,3 +76,6 @@ class MedicineReviews(APIView):
             )
             serializer = ReviewSerializer(review)
             return Response(serializer.data)
+
+    def push_test(self, request):
+        pass
