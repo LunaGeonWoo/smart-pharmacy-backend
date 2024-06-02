@@ -8,6 +8,7 @@ class MedicineTinySerializer(serializers.ModelSerializer):
     class Meta:
         model = Medicine
         fields = (
+            "id",
             "name",
             "company",
             "price",
@@ -26,6 +27,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = (
+            "id",
             "user",
             "medicine",
             "created_at",

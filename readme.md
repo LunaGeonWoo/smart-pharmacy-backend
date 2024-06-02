@@ -126,9 +126,9 @@
 
 > Request
 
-| _Params_ | Description |
-| -------- | ----------- |
-| page     | int >=1     |
+| _Params_ | Description        |
+| -------- | ------------------ |
+| page     | int >=1(default=1) |
 
 > Response
 
@@ -138,6 +138,7 @@
 
 | **_medicine_** | Description |
 | -------------- | ----------- |
+| id             | int         |
 | name           | str         |
 | company        | str         |
 | price          | int         |
