@@ -31,9 +31,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "192.168.0.50",
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -41,6 +39,7 @@ ALLOWED_HOSTS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
+    "corsheaders",
 ]
 
 CUSTOM_APPS = [
@@ -67,6 +66,7 @@ INSTALLED_APPS = SYSTEM_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -168,3 +168,7 @@ SIMPLE_JWT = {
 }
 
 PAGE_SIZE = 10
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500",
+]
