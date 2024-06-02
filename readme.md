@@ -163,11 +163,49 @@
 
 ### `[GET] /medicines/1` []
 
-- 자세한 약 정보, 가격
+> Response
+
+| Data     | Description    |
+| -------- | -------------- |
+| medicine | **_medicine_** |
+
+| **_medicine_**  | Description |
+| --------------- | ----------- |
+| id              | int         |
+| created_at      | str         |
+| updated_at      | str         |
+| serial_number   | int         |
+| name            | str         |
+| main_ingredient | str         |
+| efficacy        | str         |
+| usage           | str         |
+| need_to_know    | str         |
+| cautions        | str         |
+| beware_food     | str         |
+| side_effect     | str         |
+| how_to_store    | str         |
+| price           | int         |
 
 ### `[GET POST] /medicines/1/reviews` []
 
-- 리뷰 페이지
+> request
+
+| _Params_ | Description        |
+| -------- | ------------------ |
+| page     | int >=1(default=1) |
+
+> Response
+
+| Data   | Description  |
+| ------ | ------------ |
+| review | **_review_** |
+
+| **_reivew_** | Description |
+| ------------ | ----------- |
+| id           | int         |
+| user         | int         |
+| medicine     | int         |
+| created_at   | str         |
 
 ### `[GET PUT DELETE] /medicines/1/reviews/1` []
 
