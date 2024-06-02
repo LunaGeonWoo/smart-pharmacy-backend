@@ -2,6 +2,24 @@
 
 ## Users
 
+### `[POST] /users` [✔]
+
+> Request
+
+| Data     | Description |
+| -------- | ----------- |
+| id       | str         |
+| password | str         |
+| name     | str         |
+| email    | str         |
+
+> Response
+
+| Data    | Description |
+| ------- | ----------- |
+| refresh | str: token  |
+| access  | str: token  |
+
 ### `[POST] /users/token` [✔]
 
 > Request
@@ -13,7 +31,7 @@
 
 > Response
 
-| Dat     | Description |
+| Data    | Description |
 | ------- | ----------- |
 | refresh | str: token  |
 | access  | str: token  |
@@ -147,11 +165,11 @@
 
 - 자세한 약 정보, 가격
 
-### `[GET/POST] /medicines/1/reviews` []
+### `[GET POST] /medicines/1/reviews` []
 
 - 리뷰 페이지
 
-### `[GET/PUT/DELETE] /medicines/1/reviews/1` []
+### `[GET PUT DELETE] /medicines/1/reviews/1` []
 
 - 자기가 쓴 리뷰 수정 또는 삭제
 
