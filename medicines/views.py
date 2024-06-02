@@ -4,9 +4,9 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
-from . import serializers
+from .serializers import MedicineTinySerializer, MedicineDetailSerializer
 from .models import Medicine
-from reviews.serializers import ReviewSerializer
+from reviews.serializers import ReviewListSerializer
 from reviews.models import Review
 
 
@@ -19,7 +19,7 @@ class Medicines(APIView):
             start = (page - 1) * page_size
             end = start + page_size
             medicines = Medicine.objects.all()[start:end]
-            serializer = serializers.MedicineTinySerializer(
+            serializer = MedicineTinySerializer(
                 medicines,
                 many=True,
             )
@@ -38,7 +38,7 @@ class MedicineDetail(APIView):
 
     def get(self, request, pk):
         medicine = self.get_object(pk)
-        serializer = serializers.MedicineDetailSerializer(medicine)
+        serializer = MedicineDetailSerializer(medicine)
         return Response(serializer.data)
 
 
@@ -58,9 +58,9 @@ class MedicineReviews(APIView):
             page_size = settings.PAGE_SIZE
             start = (page - 1) * page_size
             end = start + page_size
-            all_reviews = Review.objects.all()[start:end]
             medicine = self.get_object(pk)
-            serializer = serializers.ReviewSerializer(
+            all_reviews = Review.objects.filter(medicine=medicine)[start:end]
+            serializer = ReviewListSerializer(
                 all_reviews,
                 many=True,
             )
@@ -68,14 +68,15 @@ class MedicineReviews(APIView):
             return redirect(f"{request.path}?page=1")
         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = ReviewSerializer(data=request.data)
+    def post(self, request, pk):
+        medicine = self.get_object(pk)
+        serializer = ReviewListSerializer(data=request.data)
         if serializer.is_valid():
             review = serializer.save(
                 user=request.user,
+                medicine=medicine,
             )
-            serializer = ReviewSerializer(review)
+            serializer = ReviewListSerializer(review)
             return Response(serializer.data)
-
-    def push_test(self, request):
-        pass
+        else:
+            return Response(serializer.errors)

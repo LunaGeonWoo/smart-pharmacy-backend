@@ -19,7 +19,6 @@ class Review(CommonModel):
     detail = models.TextField(
         verbose_name="댓글",
     )
-
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="댓글 단 시각",

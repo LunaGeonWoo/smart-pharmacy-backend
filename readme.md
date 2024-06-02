@@ -190,22 +190,82 @@
 
 > request
 
+| Data   | Description |
+| ------ | ----------- |
+| detail | str         |
+
 | _Params_ | Description        |
 | -------- | ------------------ |
 | page     | int >=1(default=1) |
 
 > Response
 
-| Data   | Description  |
-| ------ | ------------ |
-| review | **_review_** |
+| Data(Many) | Description  |
+| ---------- | ------------ |
+| review     | **_review_** |
 
-| **_reivew_** | Description |
+| **_review_** | Description |
 | ------------ | ----------- |
 | id           | int         |
-| user         | int         |
-| medicine     | int         |
+| updated_at   | str         |
 | created_at   | str         |
+| detail       | str         |
+| user         | **_user_**  |
+
+| **_user_** | Description |
+| ---------- | ----------- |
+| id         | int         |
+| username   | str         |
+
+## Reviews
+
+### `[GET] /reviews` [✔]
+
+> Response
+
+| Data(Many) | Description  |
+| ---------- | ------------ |
+| review     | **_review_** |
+
+| **_review_** | Description    |
+| ------------ | -------------- |
+| id           | int            |
+| updated_at   | str            |
+| created_at   | str            |
+| detail       | str            |
+| medicine     | **_medicine_** |
+
+| **_medicine_** | Description |
+| -------------- | ----------- |
+| id             | int         |
+| name           | str         |
+| company        | str         |
+| price          | int         |
+
+### `[PUT DELETE] /reviews/1` [✔]
+
+> Request
+
+| Data   | Description |
+| ------ | ----------- |
+| detail | str         |
+
+> Response
+
+| Data       | Description    |
+| ---------- | -------------- |
+| id         | int            |
+| updated_at | str            |
+| created_at | str            |
+| detail     | str            |
+| medicine   | **_medicine_** |
+
+| **_medicine_** | Description |
+| -------------- | ----------- |
+| id             | int         |
+| name           | str         |
+| company        | str         |
+| price          | int         |
 
 ## Diagnosis
 
@@ -216,13 +276,3 @@
 ### `[GET DELETE] /diagnosis/1` []
 
 - 진단내역
-
-## Reveiws
-
-### `[PUT DELETE] /reviews` []
-
-- 내가 쓴 리뷰 페이지
-
-### `[PUT DELETE] /reviews/1` []
-
-- 리뷰 수정 또는 삭제

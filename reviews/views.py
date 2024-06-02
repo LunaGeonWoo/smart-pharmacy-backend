@@ -1,20 +1,16 @@
 from django.conf import settings
 from django.shortcuts import redirect
-
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
-
-from . import serializers
+from rest_framework import status
+from rest_framework import exceptions
+from .serializers import MyReviewSerializer
 from .models import Review
-from .serializers import ReviewSerializer, ReviewDetailSerializer
 
 
-# user id filter해서 내가 쓴 리뷰만 가져오고, 페이지 추가
 class MyReviews(APIView):
-
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         try:
@@ -23,7 +19,7 @@ class MyReviews(APIView):
             start = (page - 1) * page_size
             end = start + page_size
             my_reviews = Review.objects.filter(user=request.user)[start:end]
-            serializer = serializers.ReviewSerializer(
+            serializer = MyReviewSerializer(
                 my_reviews,
                 many=True,
             )
@@ -32,18 +28,34 @@ class MyReviews(APIView):
         return Response(serializer.data)
 
 
-# 리뷰 내용 다 보여주고 수정, 삭제
-class MyReviewsDetail(APIView):
+class MyReviewDetail(APIView):
 
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
-    def get_reviews(self, request, pk):
+    def get_object(self, pk):
         try:
-            return Review.objects.filter(user=request.user).get(pk=pk)
+            return Review.objects.get(pk=pk)
         except Review.DoesNotExist:
-            raise NotFound
+            raise exceptions.NotFound
 
-    def get(self, request, pk):
-        my_reviews = self.get_reviews(pk)
-        serializer = serializers.ReviewDetailSerializer(my_reviews)
-        return Response(serializer.data)
+    def put(self, request, pk):
+        my_review = self.get_object(pk)
+        if my_review.user != request.user:
+            raise exceptions.PermissionDenied
+        serializer = MyReviewSerializer(
+            my_review,
+            data=request.data,
+        )
+        if serializer.is_valid():
+            my_review = serializer.save()
+            serializer = MyReviewSerializer(my_review)
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
+    def delete(self, request, pk):
+        my_review = self.get_object(pk)
+        if my_review.user != request.user:
+            raise exceptions.PermissionDenied
+        my_review.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
