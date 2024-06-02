@@ -2,7 +2,7 @@ from django.db import models
 from common.models import CommonModel
 
 
-class Record(CommonModel):
+class MedicalRecord(CommonModel):
 
     name = models.CharField(
         max_length=150,

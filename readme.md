@@ -276,3 +276,7 @@
 ### `[GET DELETE] /diagnosis/1` []
 
 - 진단내역
+
+## Medical Records
+
+### TODO

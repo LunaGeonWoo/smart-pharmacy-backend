@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Record
+from .models import MedicalRecord
 
 
-@admin.register(Record)
+@admin.register(MedicalRecord)
 class RecordAdmin(admin.ModelAdmin):
 
     list_display = (
