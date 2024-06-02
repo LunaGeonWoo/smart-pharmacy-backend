@@ -161,7 +161,7 @@
 | company        | str         |
 | price          | int         |
 
-### `[GET] /medicines/1` []
+### `[GET] /medicines/1` [✔]
 
 > Response
 
@@ -186,7 +186,7 @@
 | how_to_store    | str         |
 | price           | int         |
 
-### `[GET POST] /medicines/1/reviews` []
+### `[GET POST] /medicines/1/reviews` [✔]
 
 > request
 
@@ -207,12 +207,6 @@
 | medicine     | int         |
 | created_at   | str         |
 
-### `[GET PUT DELETE] /medicines/1/reviews/1` []
-
-- 자기가 쓴 리뷰 수정 또는 삭제
-
----
-
 ## Diagnosis
 
 ### `[GET POST] /diagnosis` []
@@ -222,3 +216,13 @@
 ### `[GET DELETE] /diagnosis/1` []
 
 - 진단내역
+
+## Reveiws
+
+### `[PUT DELETE] /reviews` []
+
+- 내가 쓴 리뷰 페이지
+
+### `[PUT DELETE] /reviews/1` []
+
+- 리뷰 수정 또는 삭제
