@@ -273,7 +273,7 @@
 
 - 진단하기
 
-### `[GET DELETE] /diagnosis/1` []
+### `[GET DELETE] /diagnosis/histories` []
 
 - 진단내역
 
