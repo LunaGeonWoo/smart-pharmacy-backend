@@ -31,7 +31,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -48,7 +48,6 @@ CUSTOM_APPS = [
     "reviews.apps.ReviewsConfig",
     "medicines.apps.MedicinesConfig",
     "receipts.apps.ReceiptsConfig",
-    "medical_records.apps.MedicalRecordsConfig",
     "inventories.apps.InventoriesConfig",
 ]
 
