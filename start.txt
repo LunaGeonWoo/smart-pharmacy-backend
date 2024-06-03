@@ -1,6 +1,6 @@
 import pandas as pd
 from medicines.models import Medicine
-df = pd.read_excel("e약은요정보검색.xlsx").fillna("")
+df = pd.read_excel("e약은요정보검색.xlsx").dropna(subset=['이 약의 효능은 무엇입니까?']).reset_index(drop=True)
 for i in range(len(df)):
     Medicine.objects.create(
         serial_number=df.iloc[i].values[0],
