@@ -269,14 +269,21 @@
 
 ## Diagnosis
 
-### `[GET POST] /diagnosis` []
+### `[POST] /diagnosis` []
 
-- 진단하기
+> Request
+
+| Data   | Description |
+| ------ | ----------- |
+| prompt | str         |
+
+> Response
+
+| Data    | Description |
+| ------- | ----------- |
+| refresh | str: token  |
+| access  | str: token  |
 
 ### `[GET DELETE] /diagnosis/histories` []
 
 - 진단내역
-
-## Medical Records
-
-### TODO

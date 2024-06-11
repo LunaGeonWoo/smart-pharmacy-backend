@@ -8,7 +8,7 @@ class Diagnosis(CommonModel):
         "users.User",
         on_delete=models.CASCADE,
     )
-    symptoms = models.TextField()
+    prompt = models.TextField()
     result = models.TextField()
 
     def __str__(self) -> str:
