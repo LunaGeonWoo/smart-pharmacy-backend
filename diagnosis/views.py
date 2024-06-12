@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import NotFound
 from rest_framework import exceptions
 from openai import OpenAI
-from .serializers import DiagnosisHistorySerializer
+from .serializers import DiagnosisHistorySerializer, DiagnosisHistoryDetailSerializer
 from .models import Diagnosis
 
 
@@ -80,7 +80,7 @@ class DiagnoseHistoryDetail(APIView):
         diagnose = self.get_object(pk)
         if diagnose.user != request.user:
             raise exceptions.PermissionDenied
-        serializer = DiagnosisHistorySerializer(
+        serializer = DiagnosisHistoryDetailSerializer(
             diagnose,
         )
         return Response(serializer.data)

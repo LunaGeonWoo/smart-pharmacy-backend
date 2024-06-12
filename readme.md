@@ -151,26 +151,18 @@
 
 > Response
 
-| Data(Many) | Description    |
-| ---------- | -------------- |
-| medicine   | **_medicine_** |
-
-| **_medicine_** | Description |
-| -------------- | ----------- |
-| id             | int         |
-| name           | str         |
-| company        | str         |
-| price          | int         |
+| Data(Many) | Description |
+| ---------- | ----------- |
+| id         | int         |
+| name       | str         |
+| company    | str         |
+| price      | int         |
 
 ### `[GET] /medicines/1` [✔]
 
 > Response
 
-| Data     | Description    |
-| -------- | -------------- |
-| medicine | **_medicine_** |
-
-| **_medicine_**  | Description |
+| Data            | Description |
 | --------------- | ----------- |
 | id              | int         |
 | created_at      | str         |
@@ -201,17 +193,13 @@
 
 > Response
 
-| Data(Many) | Description  |
-| ---------- | ------------ |
-| review     | **_review_** |
-
-| **_review_** | Description |
-| ------------ | ----------- |
-| id           | int         |
-| updated_at   | str         |
-| created_at   | str         |
-| detail       | str         |
-| user         | **_user_**  |
+| Data(Many) | Description |
+| ---------- | ----------- |
+| id         | int         |
+| updated_at | str         |
+| created_at | str         |
+| detail     | str         |
+| user       | **_user_**  |
 
 | **_user_** | Description |
 | ---------- | ----------- |
@@ -299,3 +287,15 @@
 | id         | int         |
 | prompt     | str         |
 | created_at | str         |
+
+### `[GET] /diagnosis/histories/1` [✔]
+
+> Response
+
+| Data       | Description |
+| ---------- | ----------- |
+| id         | int         |
+| created_at | str         |
+| prompt     | str         |
+| result     | str         |
+| user       | **_user_**  |

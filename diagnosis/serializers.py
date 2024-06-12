@@ -16,4 +16,7 @@ class DiagnosisHistorySerializer(serializers.ModelSerializer):
 class DiagnosisHistoryDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Diagnosis
-        exclude = ("updated_at",)
+        exclude = (
+            "updated_at",
+            "user",
+        )
