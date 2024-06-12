@@ -144,9 +144,10 @@
 
 > Request
 
-| _Params_ | Description        |
-| -------- | ------------------ |
-| page     | int >=1(default=1) |
+| _Params_ | Description        | Division     |
+| -------- | ------------------ | ------------ |
+| page     | int >=1(default=1) | **Optional** |
+| search   | str                | **Optional** |
 
 > Response
 
@@ -269,7 +270,7 @@
 
 ## Diagnosis
 
-### `[POST] /diagnosis` []
+### `[POST] /diagnosis` [✔]
 
 > Request
 
@@ -279,10 +280,9 @@
 
 > Response
 
-| Data    | Description |
-| ------- | ----------- |
-| refresh | str: token  |
-| access  | str: token  |
+| Data   | Description |
+| ------ | ----------- |
+| result | str         |
 
 ### `[GET DELETE] /diagnosis/histories` []
 

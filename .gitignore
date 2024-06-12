@@ -161,3 +161,4 @@ cython_debug/
 
 requesttest.http
 prompt.jsonl
+gpttest.ipynb

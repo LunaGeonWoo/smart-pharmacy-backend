@@ -1,9 +1,11 @@
 from django.shortcuts import redirect
+from django.db.models import Q
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
+from rest_framework import status
 from .serializers import MedicineTinySerializer, MedicineDetailSerializer
 from .models import Medicine
 from reviews.serializers import ReviewListSerializer
@@ -13,18 +15,39 @@ from reviews.models import Review
 class Medicines(APIView):
 
     def get(self, request):
+
         try:
             page = int(request.query_params.get("page", 1))
             page_size = settings.PAGE_SIZE
             start = (page - 1) * page_size
             end = start + page_size
+        except:
+            return Response(
+                {"error": "page must be >= 1"}, status=status.HTTP_400_BAD_REQUEST
+            )
+        search = request.query_params.get("search")
+        if not search:
             medicines = Medicine.objects.all()[start:end]
             serializer = MedicineTinySerializer(
                 medicines,
                 many=True,
             )
-        except:
-            return redirect(f"{request.path}?page=1")
+        else:
+            try:
+                medicines = Medicine.objects.filter(
+                    Q(name__contains=search)
+                    | Q(company__contains=search)
+                    | Q(main_ingredient__contains=search)
+                    | Q(efficacy__contains=search)
+                )[start:end]
+                serializer = MedicineTinySerializer(
+                    medicines,
+                    many=True,
+                )
+            except:
+                return Response(
+                    {"error": "page must be >= 1"}, status=status.HTTP_400_BAD_REQUEST
+                )
         return Response(serializer.data)
 
 
