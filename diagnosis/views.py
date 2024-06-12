@@ -3,14 +3,16 @@ from django.shortcuts import redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import NotFound
+from rest_framework import exceptions
 from openai import OpenAI
 from .serializers import DiagnosisHistorySerializer
 from .models import Diagnosis
 
 
 class Diagnose(APIView):
+    permission_classes = [IsAuthenticated]
 
     client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
@@ -45,9 +47,9 @@ class Diagnose(APIView):
         return Response({"result": result})
 
 
-class DiagnoseHistory(APIView):
+class DiagnoseHistories(APIView):
 
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         try:
@@ -60,7 +62,25 @@ class DiagnoseHistory(APIView):
                 diagnosis_history,
                 many=True,
             )
-        except Exception as e:
-            print(e)
+        except:
             return redirect(f"{request.path}?page=1")
+        return Response(serializer.data)
+
+
+class DiagnoseHistoryDetail(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return Diagnosis.objects.get(pk=pk)
+        except Diagnosis.DoesNotExist:
+            raise NotFound
+
+    def get(self, request, pk):
+        diagnose = self.get_object(pk)
+        if diagnose.user != request.user:
+            raise exceptions.PermissionDenied
+        serializer = DiagnosisHistorySerializer(
+            diagnose,
+        )
         return Response(serializer.data)

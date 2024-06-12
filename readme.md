@@ -284,6 +284,18 @@
 | ------ | ----------- |
 | result | str         |
 
-### `[GET DELETE] /diagnosis/histories` []
+### `[GET] /diagnosis/histories` [✔]
 
-- 진단내역
+> Request
+
+| _Params_ | Description        |
+| -------- | ------------------ |
+| page     | int >=1(default=1) |
+
+> Response
+
+| Data(Many) | Description |
+| ---------- | ----------- |
+| id         | int         |
+| prompt     | str         |
+| created_at | str         |
