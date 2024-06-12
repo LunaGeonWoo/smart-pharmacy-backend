@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import exceptions
@@ -18,3 +19,12 @@ class Users(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+
+
+class Me(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = PrivateUserSerializer(user)
+        return Response(serializer.data)
