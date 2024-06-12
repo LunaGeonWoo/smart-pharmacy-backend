@@ -15,3 +15,10 @@ for i in range(len(df)):
         side_effect=df.iloc[i].values[9],
         how_to_store=df.iloc[i].values[10],
     )
+
+    
+from medicines.models import Medicine
+import random
+for medicine in Medicine.objects.all():
+    medicine.price=random.randint(5000,30000)
+    medicine.save()
