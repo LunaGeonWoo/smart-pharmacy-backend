@@ -1,6 +1,7 @@
 from django.db import models
 from common.models import CommonModel
 from django.core import validators
+import random
 
 
 class Medicine(CommonModel):
@@ -58,9 +59,14 @@ class Medicine(CommonModel):
         verbose_name="이 약은 어떻게 보관해야 합니까?",
     )
     price = models.PositiveIntegerField(
-        default=0,
+        default=random.randint(5000, 25000),
         validators=[validators.MinValueValidator(0)],
         verbose_name="가격",
+    )
+    remaining = models.PositiveIntegerField(
+        default=random.randint(1, 10),
+        validators=[validators.MinValueValidator(0)],
+        verbose_name="개수",
     )
 
     def __str__(self) -> str:
