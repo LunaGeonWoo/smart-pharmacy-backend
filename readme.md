@@ -270,6 +270,7 @@
 
 | Data   | Description |
 | ------ | ----------- |
+| id     | int         |
 | result | str         |
 
 ### `[GET] /diagnosis/histories` [✔]

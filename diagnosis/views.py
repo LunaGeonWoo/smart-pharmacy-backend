@@ -39,12 +39,12 @@ class Diagnose(APIView):
             )
         res = self.chat_with_chatgpt(prompt)
         result = res.choices[0].message.content
-        Diagnosis.objects.create(
+        diagnose = Diagnosis.objects.create(
             prompt=prompt,
             result=result,
             user=request.user,
         )
-        return Response({"result": result})
+        return Response({"id": diagnose.id, "result": result})
 
 
 class DiagnoseHistories(APIView):
