@@ -24,7 +24,7 @@ class Diagnosis(APIView):
         response = self.gpt4o.converse(prompt)
         result = response.choices[0].message.content
         diagnose = Diagnose.objects.create(user=request.user)
-        query = Query.objects.create(
+        Query.objects.create(
             prompt=prompt,
             result=result,
             diagnose=diagnose,
@@ -34,7 +34,7 @@ class Diagnosis(APIView):
         title = response.choices[0].message.content
         diagnose.title = title
         diagnose.save()
-        return Response({"id": diagnose.id, "result": query.result})
+        return redirect("diagnosis:diagnose_detail", diagnose)
 
 
 class DiagnoseDetail(APIView):
