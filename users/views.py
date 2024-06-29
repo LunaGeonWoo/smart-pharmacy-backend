@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import exceptions
 from .serializers import PrivateUserSerializer
+from django.contrib.auth import login
 
 
 class Users(APIView):
@@ -16,6 +17,7 @@ class Users(APIView):
             user.set_password(password)
             user.save()
             serializer = PrivateUserSerializer(user)
+            login(request, user)
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
