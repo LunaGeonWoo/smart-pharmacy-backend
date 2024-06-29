@@ -4,7 +4,7 @@ from medicines.serializers import MedicineTinySerializer
 
 
 class InventorySerializer(ModelSerializer):
-    medicine = MedicineTinySerializer()
+    medicine = MedicineTinySerializer(read_only=True)
 
     class Meta:
         model = Inventory

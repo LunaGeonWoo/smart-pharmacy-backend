@@ -3,12 +3,19 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import exceptions
+from medicines.models import Medicine
 from .serializers import InventorySerializer
 from .models import Inventory
 
 
 class Inventories(APIView):
     permission_classes = [IsAuthenticated]
+
+    def get_medicine(self, pk):
+        try:
+            return Medicine.objects.get(pk=pk)
+        except Medicine.DoesNotExist:
+            raise exceptions.NotFound
 
     def get(self, request):
         my_inventories = Inventory.objects.filter(owner=request.user)
@@ -21,10 +28,14 @@ class Inventories(APIView):
     def post(self, request):
         serializer = InventorySerializer(data=request.data)
         if serializer.is_valid():
-            try:
-                medicine_pk = int(request.data.get("medicine"))
-            except:
-                raise exceptions.ParseError
+            medicine_pk = request.data.get("medicine")
+            if medicine_pk:
+                try:
+                    medicine_pk = int(medicine_pk)
+                except:
+                    raise exceptions.ParseError
+            else:
+                return Response({"medicine": ["이 필드는 필수 항목입니다."]})
             medicine = self.get_medicine(medicine_pk)
             inventory = serializer.save(
                 medicine=medicine,
