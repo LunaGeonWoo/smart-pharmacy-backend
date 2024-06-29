@@ -5,6 +5,7 @@ from common.models import CommonModel
 class Diagnose(CommonModel):
     user = models.ForeignKey(
         "users.User",
+        related_name="diagnosis",
         on_delete=models.CASCADE,
     )
     title = models.CharField(
