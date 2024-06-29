@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.shortcuts import redirect
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -24,7 +23,7 @@ class MyReviews(APIView):
                 many=True,
             )
         except:
-            return redirect(f"{request.path}?page=1")
+            raise exceptions.ParseError
         return Response(serializer.data)
 
 

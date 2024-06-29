@@ -1,10 +1,9 @@
-from django.shortcuts import redirect
 from django.db.models import Q
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, ParseError
 from rest_framework import status
 from .serializers import MedicineTinySerializer, MedicineDetailSerializer
 from .models import Medicine
@@ -88,7 +87,7 @@ class MedicineReviews(APIView):
                 many=True,
             )
         except:
-            return redirect(f"{request.path}?page=1")
+            raise ParseError
         return Response(serializer.data)
 
     def post(self, request, pk):

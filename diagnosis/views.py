@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, ParseError
 from rest_framework import exceptions
 from .gpt_api import GPT4o
 from .serializers import DiagnosisHistorySerializer, DiagnosisDetailSerializer
@@ -97,5 +97,5 @@ class DiagnoseHistory(APIView):
                 many=True,
             )
         except:
-            return redirect(f"{request.path}?page=1")
+            raise ParseError
         return Response(serializer.data)
