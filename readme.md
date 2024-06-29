@@ -256,9 +256,9 @@
 | company        | str         |
 | price          | int         |
 
-## Diagnosis
+## Diagnosis #TODO
 
-### `[POST] /diagnosis` [✔]
+### `[POST] /diagnosis` []
 
 > Request
 
@@ -273,7 +273,7 @@
 | id     | int         |
 | result | str         |
 
-### `[GET POST] /diagnosis/1` [✔]
+### `[GET POST] /diagnosis/1` []
 
 > Request
 
@@ -294,7 +294,7 @@
 | result        | str (gpt가 답한 답변)          |
 | created_at    | str                            |
 
-### `[GET] /diagnosis/history` [✔]
+### `[GET] /diagnosis/history` []
 
 > Request
 
