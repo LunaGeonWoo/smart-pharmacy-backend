@@ -273,7 +273,28 @@
 | id     | int         |
 | result | str         |
 
-### `[GET] /diagnosis/histories` [✔]
+### `[GET POST] /diagnosis/1` [✔]
+
+> Request
+
+| Data   | Description |
+| ------ | ----------- |
+| prompt | str         |
+
+> Response
+
+| Data    | Description   |
+| ------- | ------------- |
+| id      | int           |
+| queries | **_queries_** |
+
+| **_queries_** | Description                    |
+| ------------- | ------------------------------ |
+| prompt        | str (사용자가 입력한 프롬프트) |
+| result        | str (gpt가 답한 답변)          |
+| created_at    | str                            |
+
+### `[GET] /diagnosis/history` [✔]
 
 > Request
 
@@ -288,15 +309,3 @@
 | id         | int         |
 | prompt     | str         |
 | created_at | str         |
-
-### `[GET] /diagnosis/histories/1` [✔]
-
-> Response
-
-| Data       | Description |
-| ---------- | ----------- |
-| id         | int         |
-| created_at | str         |
-| prompt     | str         |
-| result     | str         |
-| user       | **_user_**  |

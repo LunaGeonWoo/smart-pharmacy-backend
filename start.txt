@@ -1,5 +1,6 @@
 import pandas as pd
 from medicines.models import Medicine
+import random
 df = pd.read_excel("e약은요정보검색.xlsx").dropna(subset=['이 약의 효능은 무엇입니까?']).reset_index(drop=True)
 for i in range(len(df)):
     Medicine.objects.create(
@@ -14,11 +15,7 @@ for i in range(len(df)):
         beware_food=df.iloc[i].values[8],
         side_effect=df.iloc[i].values[9],
         how_to_store=df.iloc[i].values[10],
+        price=random.randint(5, 50) * 500,
+        remaining=random.randint(1, 10),
     )
-
     
-from medicines.models import Medicine
-import random
-for medicine in Medicine.objects.all():
-    medicine.price=random.randint(5000,30000)
-    medicine.save()

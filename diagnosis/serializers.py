@@ -1,22 +1,34 @@
 from rest_framework import serializers
-from .models import Diagnosis
+from .models import Diagnose, Query
 
 
-class DiagnosisHistorySerializer(serializers.ModelSerializer):
-
+class QueriesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Diagnosis
+        model = Query
         fields = (
-            "id",
             "prompt",
+            "result",
             "created_at",
         )
 
 
-class DiagnosisHistoryDetailSerializer(serializers.ModelSerializer):
+class DiagnosisDetailSerializer(serializers.ModelSerializer):
+    queries = QueriesSerializer(many=True)
+
     class Meta:
-        model = Diagnosis
-        exclude = (
-            "updated_at",
-            "user",
+        model = Diagnose
+        fields = (
+            "id",
+            "title",
+            "queries",
+        )
+
+
+class DiagnosisHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Diagnose
+        fields = (
+            "id",
+            "title",
+            "created_at",
         )

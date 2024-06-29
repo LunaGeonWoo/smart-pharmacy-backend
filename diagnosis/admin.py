@@ -1,7 +1,12 @@
 from django.contrib import admin
-from .models import Diagnosis
+from .models import Diagnose, Query
 
 
-@admin.register(Diagnosis)
-class DiagnosisAdmin(admin.ModelAdmin):
+@admin.register(Diagnose)
+class DiagnoseAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Query)
+class QueryAdmin(admin.ModelAdmin):
     pass
