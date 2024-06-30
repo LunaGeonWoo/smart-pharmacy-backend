@@ -58,10 +58,11 @@
 
 > Response
 
-| Data    | Description |
-| ------- | ----------- |
-| refresh | str: token  |
-| access  | str: token  |
+| Data        | Description |
+| ----------- | ----------- |
+| username    | str         |
+| email       | str         |
+| date_joined | str         |
 
 ## Receipts
 
@@ -286,6 +287,7 @@
 | Data    | Description   |
 | ------- | ------------- |
 | id      | int           |
+| title   | str           |
 | queries | **_queries_** |
 
 | **_queries_** | Description                    |
@@ -307,5 +309,5 @@
 | Data(Many) | Description |
 | ---------- | ----------- |
 | id         | int         |
-| prompt     | str         |
+| title      | str         |
 | created_at | str         |
