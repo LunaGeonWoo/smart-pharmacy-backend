@@ -2,13 +2,13 @@
 
 ## Users
 
-### `[POST] /users` [✔]
+### `[POST] /users/` [✔]
 
 > Request
 
 | Data     | Description |
 | -------- | ----------- |
-| id       | str         |
+| username | str         |
 | password | str         |
 | name     | str         |
 | email    | str         |
@@ -20,7 +20,7 @@
 | refresh | str: token  |
 | access  | str: token  |
 
-### `[POST] /users/token` [✔]
+### `[POST] /users/token/` [✔]
 
 > Request
 
@@ -36,7 +36,7 @@
 | refresh | str: token  |
 | access  | str: token  |
 
-### `[POST] /users/token/verify` [✔]
+### `[POST] /users/token/verify/` [✔]
 
 > Request
 
@@ -48,7 +48,7 @@
 
 **If is valid** You can receive `HTTP 200 OK`
 
-### `[POST] /users/token/refresh` [✔]
+### `[POST] /users/token/refresh/` [✔]
 
 > Request
 
@@ -65,7 +65,7 @@
 
 ## Receipts
 
-### `[GET] /receipts`[✔]
+### `[GET] /receipts/`[✔]
 
 > Response
 
@@ -76,7 +76,7 @@
 | quantity    | int         |
 | purchase_at | str         |
 
-### `[GET] /receipts/1` [✔]
+### `[GET] /receipts/1/` [✔]
 
 > Response
 
@@ -107,7 +107,7 @@
 
 ## Inventories
 
-### `[GET POST] /inventories` [✔]
+### `[GET POST] /inventories/` [✔]
 
 > Request
 
@@ -130,7 +130,7 @@
 | company        | str         |
 | price          | int: >=0    |
 
-### `[PUT DELETE] /inventories/1` [✔]
+### `[PUT DELETE] /inventories/1/` [✔]
 
 > Request
 
@@ -140,7 +140,7 @@
 
 ## Medicines
 
-### `[GET] /medicines` [✔]
+### `[GET] /medicines/` [✔]
 
 > Request
 
@@ -158,7 +158,7 @@
 | company    | str         |
 | price      | int         |
 
-### `[GET] /medicines/1` [✔]
+### `[GET] /medicines/1/` [✔]
 
 > Response
 
@@ -179,7 +179,7 @@
 | how_to_store    | str         |
 | price           | int         |
 
-### `[GET POST] /medicines/1/reviews` [✔]
+### `[GET POST] /medicines/1/reviews/` [✔]
 
 > request
 
@@ -208,7 +208,7 @@
 
 ## Reviews
 
-### `[GET] /reviews` [✔]
+### `[GET] /reviews/` [✔]
 
 > Response
 
@@ -231,7 +231,7 @@
 | company        | str         |
 | price          | int         |
 
-### `[PUT DELETE] /reviews/1` [✔]
+### `[PUT DELETE] /reviews/1/` [✔]
 
 > Request
 
@@ -258,7 +258,7 @@
 
 ## Diagnosis #TODO
 
-### `[POST] /diagnosis` []
+### `[POST] /diagnosis/` []
 
 > Request
 
@@ -268,12 +268,9 @@
 
 > Response
 
-| Data   | Description |
-| ------ | ----------- |
-| id     | int         |
-| result | str         |
+/diagnosis/1/
 
-### `[GET POST] /diagnosis/1` []
+### `[GET POST] /diagnosis/1/` []
 
 > Request
 
@@ -294,7 +291,7 @@
 | result        | str (gpt가 답한 답변)          |
 | created_at    | str                            |
 
-### `[GET] /diagnosis/history` []
+### `[GET] /diagnosis/history/` []
 
 > Request
 
