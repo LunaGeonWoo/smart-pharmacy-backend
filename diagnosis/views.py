@@ -34,7 +34,7 @@ class Diagnosis(APIView):
         title = response.choices[0].message.content
         diagnose.title = title
         diagnose.save()
-        return redirect("diagnosis:diagnose_detail", diagnose)
+        return redirect("diagnosis:diagnose_detail", diagnose.id)
 
 
 class DiagnoseDetail(APIView):
