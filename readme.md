@@ -15,10 +15,13 @@
 
 > Response
 
-| Data    | Description |
-| ------- | ----------- |
-| refresh | str: token  |
-| access  | str: token  |
+| Data        | Description |
+| ----------- | ----------- |
+| last_login  | str: token  |
+| username    | str: token  |
+| email       | str: token  |
+| date_joined | str: token  |
+| name        | str: token  |
 
 ### `[POST] /users/token/` [✔]
 
