@@ -58,11 +58,10 @@
 
 > Response
 
-| Data        | Description |
-| ----------- | ----------- |
-| username    | str         |
-| email       | str         |
-| date_joined | str         |
+| Data    | Description |
+| ------- | ----------- |
+| refresh | str: token  |
+| access  | str: token  |
 
 ## Receipts
 
