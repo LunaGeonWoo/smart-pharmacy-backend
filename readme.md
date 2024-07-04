@@ -61,10 +61,9 @@
 
 > Response
 
-| Data    | Description |
-| ------- | ----------- |
-| refresh | str: token  |
-| access  | str: token  |
+| Data   | Description |
+| ------ | ----------- |
+| access | str: token  |
 
 ## Receipts
 
