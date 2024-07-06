@@ -37,6 +37,32 @@
 **login success** You can receive `HTTP 200 OK`
 **login fail** You can receive `HTTP 401 UNAUTHORIZED`
 
+### `[POST] /users/log-in/` [✔]
+
+> Request
+
+| Data     | Description |
+| -------- | ----------- |
+| username | str         |
+| password | str         |
+
+> Response
+
+**login success** You can receive `HTTP 200 OK`
+**login fail** You can receive `HTTP 401 UNAUTHORIZED`
+
+### `[POST] /users/username/<str:username>` [✔]
+
+> Request
+
+**login success** You can receive `HTTP 200 OK`
+**login fail** You can receive `HTTP 204 NO CONTENT`
+
+> Response
+
+**login success** You can receive `HTTP 200 OK`
+**login fail** You can receive `HTTP 401 UNAUTHORIZED`
+
 ### `[POST] /users/token/` [✔]
 
 > Request

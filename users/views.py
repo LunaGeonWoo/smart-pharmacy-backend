@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import exceptions
 from .serializers import PrivateUserSerializer
+from .models import User
 
 
 class Users(APIView):
@@ -22,6 +23,14 @@ class Users(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+
+
+class UserName(APIView):
+    def get(self, request, username):
+        if User.objects.filter(username=username).exists():
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class LogIn(APIView):
