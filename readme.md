@@ -34,7 +34,8 @@
 
 > Response
 
-**If is valid** You can receive `HTTP 200 OK`
+**login success** You can receive `HTTP 200 OK`
+**login fail** You can receive `HTTP 401 UNAUTHORIZED`
 
 ### `[POST] /users/token/` [✔]
 
