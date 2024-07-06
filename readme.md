@@ -23,6 +23,19 @@
 | date_joined | str: token  |
 | name        | str: token  |
 
+### `[POST] /users/log-in/` [✔]
+
+> Request
+
+| Data     | Description |
+| -------- | ----------- |
+| username | str         |
+| password | str         |
+
+> Response
+
+**If is valid** You can receive `HTTP 200 OK`
+
 ### `[POST] /users/token/` [✔]
 
 > Request
@@ -260,7 +273,7 @@
 
 ## Diagnosis #TODO
 
-### `[POST] /diagnosis/` []
+### `[POST] /diagnosis/` [✔]
 
 > Request
 
@@ -271,6 +284,7 @@
 > Response
 
 /diagnosis/1/
+아래에 적혀있는 곳으로 redirect 시킴
 
 ### `[GET POST] /diagnosis/1/` []
 
