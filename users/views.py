@@ -2,6 +2,7 @@ from django.contrib.auth import login, authenticate
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework import exceptions
 from .serializers import PrivateUserSerializer
 
@@ -38,7 +39,10 @@ class LogIn(APIView):
             login(request, user)
             return Response({"ok": "Welcome!"})
         else:
-            return Response({"error": "wrong password"})
+            return Response(
+                {"error": "wrong password"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
 
 
 class Me(APIView):
