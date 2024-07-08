@@ -23,40 +23,38 @@
 | date_joined | str: token  |
 | name        | str: token  |
 
-### `[POST] /users/log-in/` [✔]
-
-> Request
-
-| Data     | Description |
-| -------- | ----------- |
-| username | str         |
-| password | str         |
+### `[POST] /users/username/<str:username>/` [✔]
 
 > Response
-
-**login success** You can receive `HTTP 200 OK`
-**login fail** You can receive `HTTP 401 UNAUTHORIZED`
-
-### `[POST] /users/log-in/` [✔]
-
-> Request
-
-| Data     | Description |
-| -------- | ----------- |
-| username | str         |
-| password | str         |
-
-> Response
-
-**login success** You can receive `HTTP 200 OK`
-**login fail** You can receive `HTTP 401 UNAUTHORIZED`
-
-### `[POST] /users/username/<str:username>` [✔]
-
-> Request
 
 **login success** You can receive `HTTP 200 OK`
 **login fail** You can receive `HTTP 204 NO CONTENT`
+
+### `[POST] /users/log-in/` [✔]
+
+> Request
+
+| Data     | Description |
+| -------- | ----------- |
+| username | str         |
+| password | str         |
+
+> Response
+
+**login success** You can receive `HTTP 200 OK`
+**login fail** You can receive `HTTP 401 UNAUTHORIZED`
+
+### `[POST] /users/me/` [✔]
+
+> Request
+
+| Data        | Description |
+| ----------- | ----------- |
+| last_login  | str         |
+| username    | str         |
+| email       | str         |
+| date_joined | str         |
+| name        | str         |
 
 > Response
 
@@ -78,18 +76,6 @@
 | ------- | ----------- |
 | refresh | str: token  |
 | access  | str: token  |
-
-### `[POST] /users/token/verify/` [✔]
-
-> Request
-
-| Data  | Description |
-| ----- | ----------- |
-| token | str         |
-
-> Response
-
-**If is valid** You can receive `HTTP 200 OK`
 
 ### `[POST] /users/token/refresh/` [✔]
 
