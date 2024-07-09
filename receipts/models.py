@@ -7,6 +7,25 @@ class Receipt(models.Model):
         auto_now_add=True,
         verbose_name="구매 시각",
     )
+    owner = models.ForeignKey(
+        "users.User",
+        on_delete=models.CASCADE,
+        verbose_name="주인",
+    )
+
+    def get_total_price(self):
+        return self.quantity * self.price_per_medicine_at_purchase
+
+    def __str__(self) -> str:
+        return f"{self.past_medicine.name} {self.past_medicine.quantity}개 / {self.owner.name}"
+
+
+class PastMedicine(models.Model):
+    receipt = models.ForeignKey(
+        Receipt,
+        on_delete=models.CASCADE,
+        related_name="past_medicine",
+    )
     medicine = models.ForeignKey(
         "medicines.Medicine",
         on_delete=models.SET_DEFAULT,
@@ -23,14 +42,6 @@ class Receipt(models.Model):
         validators=[MinValueValidator(0)],
         verbose_name="구매 당시 하나 당 가격",
     )
-    owner = models.ForeignKey(
-        "users.User",
-        on_delete=models.CASCADE,
-        verbose_name="주인",
-    )
-
-    def get_total_price(self):
-        return self.quantity * self.price_per_medicine_at_purchase
 
     def __str__(self) -> str:
         return f"{self.medicine.name} {self.quantity}개 / {self.owner.name}"

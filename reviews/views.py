@@ -57,4 +57,4 @@ class MyReviewDetail(APIView):
         if my_review.user != request.user:
             raise exceptions.PermissionDenied
         my_review.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_200_OK)

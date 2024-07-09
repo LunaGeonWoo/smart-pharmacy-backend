@@ -1,9 +1,11 @@
+from django.shortcuts import redirect
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import exceptions
 from medicines.models import Medicine
+from receipts.models import Receipt, PastMedicine
 from .serializers import InventorySerializer
 from .models import Inventory
 
@@ -35,7 +37,10 @@ class Inventories(APIView):
                 except:
                     raise exceptions.ParseError
             else:
-                return Response({"medicine": ["이 필드는 필수 항목입니다."]})
+                return Response(
+                    {"medicine": ["이 필드는 필수 항목입니다."]},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
             medicine = self.get_medicine(medicine_pk)
             inventory = serializer.save(
                 medicine=medicine,
@@ -45,6 +50,25 @@ class Inventories(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+
+
+class InventoriesPurchase(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        my_inventories = Inventory.objects.filter(owner=request.user)
+        receipt = Receipt.objects.create(owner=request.user)
+        for my_inventory in my_inventories:
+            receipt.past_medicine.add(
+                PastMedicine.objects.create(
+                    receipt=receipt,
+                    medicine=my_inventory.medicine,
+                    quantity=my_inventory.quantity,
+                    price_per_medicine_at_purchase=my_inventory.medicine.price,
+                )
+            )
+            my_inventory.delete()
+        return Response(status=status.HTTP_200_OK)
 
 
 class InventoryDetail(APIView):
@@ -76,4 +100,4 @@ class InventoryDetail(APIView):
         if inventory.owner != request.user:
             raise exceptions.PermissionDenied
         inventory.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_200_OK)

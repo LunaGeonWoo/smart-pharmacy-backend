@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import NotFound, ParseError
-from rest_framework import exceptions
+from rest_framework import exceptions, status
 from .gpt_api import GPT4o
 from .serializers import DiagnosisHistorySerializer, DiagnosisDetailSerializer
 from .models import Diagnose, Query
@@ -19,6 +19,7 @@ class Diagnosis(APIView):
         if not prompt:
             return Response(
                 {"prompt": ["이 필드는 필수 항목입니다."]},
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         response = self.gpt4o.converse(prompt)
@@ -62,6 +63,7 @@ class DiagnoseDetail(APIView):
         if not prompt:
             return Response(
                 {"prompt": ["이 필드는 필수 항목입니다."]},
+                status=status.HTTP_400_BAD_REQUEST,
             )
         queries = Query.objects.filter(diagnose=diagnose)
         messages = []

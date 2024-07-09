@@ -8,7 +8,6 @@ from . import serializers
 
 
 class Receipts(APIView):
-
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
