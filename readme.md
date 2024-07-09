@@ -182,6 +182,13 @@
 | company  | str         |
 | price    | int         |
 
+### `[POST] /inventories/purchase/` [✔]
+
+> Response
+
+**_if empty_** You can receive `HTTP  OK`
+**_if not empty_** You can receive `HTTP 200 OK`
+
 ## Medicines
 
 ### `[GET] /medicines/` [✔]
