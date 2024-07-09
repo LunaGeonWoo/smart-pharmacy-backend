@@ -19,7 +19,7 @@ class Inventory(CommonModel):
     )
 
     def __str__(self):
-        return f"{self.owner.username}의 {self.medicine.name} {self.quantity}개"
+        return f"{self.owner}의 장바구니"
 
     class Meta:
         verbose_name_plural = "Inventories"
