@@ -100,38 +100,31 @@
 | Data(Many)  | Description |
 | ----------- | ----------- |
 | id          | int         |
-| medicine    | str: name   |
-| quantity    | int         |
+| total_price | int         |
 | purchase_at | str         |
 
 ### `[GET] /receipts/1/` [✔]
 
 > Response
 
-| Data                           | Description    |
+| Data           | Description          |
+| -------------- | -------------------- |
+| purchase_at    | str                  |
+| total_price    | int                  |
+| past_medicines | **_past_medicines_** |
+
+| **_past_medicines_**           | Description    |
 | ------------------------------ | -------------- |
-| id                             | int            |
-| purchase_at                    | str            |
 | quantity                       | int            |
-| price_per_medicine_at_purchase | int            |
+| price_per_medicine_at_purchase | str            |
 | medicine                       | **_medicine_** |
 
-| **_medicine_**  | Description |
-| --------------- | ----------- |
-| id              | int         |
-| created_at      | str         |
-| updated_at      | str         |
-| serial_number   | int         |
-| name            | str         |
-| main_ingredient | str         |
-| efficacy        | str         |
-| usage           | str         |
-| need_to_know    | str         |
-| cautions        | str         |
-| beware_food     | str         |
-| side_effect     | str         |
-| how_to_store    | str         |
-| price           | int         |
+| **_medicine_** | Description |
+| -------------- | ----------- |
+| id             | int         |
+| name           | str         |
+| company        | str         |
+| price          | int         |
 
 ## Inventories
 
@@ -145,6 +138,9 @@
 | quantity | int: >=0    |
 
 > Response
+
+`GET이면 Many O`<br>
+`POST면 Many X > 하나만`
 
 | Data(Many) | Description    |
 | ---------- | -------------- |
