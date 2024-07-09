@@ -14,5 +14,3 @@ class ReviewAdmin(admin.ModelAdmin):
         "medicine",
         "created_at",
     )
-
-    readonly_fields = ("created_at",)

@@ -4,21 +4,23 @@ from .models import Receipt, PastMedicine
 
 @admin.register(Receipt)
 class ReceiptAdmin(admin.ModelAdmin):
+    def owner_name(self, receipt):
+        return receipt.owner.name
 
     list_display = (
-        "owner",
+        "owner_name",
         "purchase_at",
     )
 
-    readonly_fields = ("purchase_at",)
-
 
 @admin.register(PastMedicine)
-class ReceiptAdmin(admin.ModelAdmin):
+class PastMedicineAdmin(admin.ModelAdmin):
+    def owner_name(self, past_medicine):
+        return past_medicine.receipt.owner.name
 
     list_display = (
         "medicine",
-        "quantity",
+        "owner_name",
         "price_per_medicine_at_purchase",
     )
 
