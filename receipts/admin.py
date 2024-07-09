@@ -4,8 +4,6 @@ from .models import Receipt, PastMedicine
 
 @admin.register(Receipt)
 class ReceiptAdmin(admin.ModelAdmin):
-    def owner(self, receipt):
-        return receipt.owner
 
     list_display = (
         "owner",
@@ -16,7 +14,7 @@ class ReceiptAdmin(admin.ModelAdmin):
 @admin.register(PastMedicine)
 class PastMedicineAdmin(admin.ModelAdmin):
     def owner(self, past_medicine):
-        return past_medicine.receipt.owner.name
+        return past_medicine.receipt.owner
 
     list_display = (
         "medicine",
