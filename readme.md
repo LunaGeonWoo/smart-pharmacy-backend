@@ -148,7 +148,7 @@
 
 | Data(Many) | Description    |
 | ---------- | -------------- |
-| quantity   | str            |
+| quantity   | int            |
 | medicine   | **_medicine_** |
 
 | **_medicine_** | Description |
