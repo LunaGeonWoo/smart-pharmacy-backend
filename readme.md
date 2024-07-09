@@ -148,11 +148,13 @@
 
 | Data(Many) | Description    |
 | ---------- | -------------- |
+| id         | int            |
 | quantity   | int            |
 | medicine   | **_medicine_** |
 
 | **_medicine_** | Description |
 | -------------- | ----------- |
+| id             | int         |
 | name           | str         |
 | company        | str         |
 | price          | int: >=0    |
