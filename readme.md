@@ -167,6 +167,21 @@
 | -------- | ----------- |
 | quantity | int: >=0    |
 
+> Response
+
+| Data     | Description    |
+| -------- | -------------- |
+| id       | int            |
+| quantity | int            |
+| medicine | **_medicine_** |
+
+| medicine | Description |
+| -------- | ----------- |
+| id       | int         |
+| name     | str         |
+| company  | str         |
+| price    | int         |
+
 ## Medicines
 
 ### `[GET] /medicines/` [✔]
