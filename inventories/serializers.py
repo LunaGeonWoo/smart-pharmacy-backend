@@ -9,7 +9,6 @@ class InventorySerializer(ModelSerializer):
     class Meta:
         model = Inventory
         fields = (
-            "id",
             "quantity",
             "medicine",
         )
