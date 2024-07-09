@@ -11,10 +11,14 @@ class Receipt(models.Model):
         "users.User",
         on_delete=models.CASCADE,
         verbose_name="주인",
+        related_name="receipts",
     )
 
-    def get_total_price(self):
-        return self.quantity * self.past_medicine.price_per_medicine_at_purchase
+    def total_price(self):
+        return sum(
+            medicine.price_per_medicine_at_purchase * medicine.quantity
+            for medicine in self.past_medicines.all()
+        )
 
     def __str__(self) -> str:
         return f"{self.owner.name}의 영수증 {self.purchase_at}"
@@ -24,7 +28,7 @@ class PastMedicine(models.Model):
     receipt = models.ForeignKey(
         Receipt,
         on_delete=models.CASCADE,
-        related_name="past_medicine",
+        related_name="past_medicines",
     )
     medicine = models.ForeignKey(
         "medicines.Medicine",

@@ -7,12 +7,12 @@ class Inventory(CommonModel):
     owner = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
-        related_name="inventory",
+        related_name="inventories",
     )
     medicine = models.ForeignKey(
         "medicines.Medicine",
         on_delete=models.CASCADE,
-        related_name="inventory",
+        related_name="inventories",
     )
     quantity = models.PositiveIntegerField(
         validators=[MinValueValidator(1)],
