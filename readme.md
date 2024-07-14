@@ -261,21 +261,18 @@
 
 ## Reviews
 
-### `[GET] /reviews/` [✔]
+### `[GET] /reviews/` (내가 단 리뷰들) [✔]
 
 > Response
 
-| Data(Many) | Description  |
-| ---------- | ------------ |
-| review     | **_review_** |
-
-| **_review_** | Description    |
-| ------------ | -------------- |
-| id           | int            |
-| updated_at   | str            |
-| created_at   | str            |
-| detail       | str            |
-| medicine     | **_medicine_** |
+| Data(Many) | Description    |
+| ---------- | -------------- |
+| id         | int            |
+| updated_at | str            |
+| created_at | str            |
+| detail     | str            |
+| rating     | int            |
+| medicine   | **_medicine_** |
 
 | **_medicine_** | Description |
 | -------------- | ----------- |
@@ -283,6 +280,9 @@
 | name           | str         |
 | company        | str         |
 | price          | int         |
+| average_rating | float       |
+| review_count   | int         |
+| remaining      | int         |
 
 ### `[PUT DELETE] /reviews/1/` [✔]
 
@@ -291,6 +291,7 @@
 | Data   | Description |
 | ------ | ----------- |
 | detail | str         |
+| rating | int(1~5)    |
 
 > Response
 
@@ -300,6 +301,7 @@
 | updated_at | str            |
 | created_at | str            |
 | detail     | str            |
+| rating     | int            |
 | medicine   | **_medicine_** |
 
 | **_medicine_** | Description |
@@ -308,6 +310,9 @@
 | name           | str         |
 | company        | str         |
 | price          | int         |
+| average_rating | float       |
+| review_count   | int         |
+| remaining      | int         |
 
 ## Diagnosis #TODO
 

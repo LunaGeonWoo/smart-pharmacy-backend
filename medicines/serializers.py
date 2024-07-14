@@ -31,22 +31,3 @@ class MedicineDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medicine
         fields = "__all__"
-
-
-class ReviewSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Review
-        fields = (
-            "id",
-            "user",
-            "medicine",
-            "created_at",
-        )
-
-
-class ReviewDetailSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Review
-        fields = "__all__"

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Review
 from users.serializers import UserTinySerializers
-from medicines.serializers import MedicineTinySerializer, MedicineDetailSerializer
+from medicines.serializers import MedicineTinySerializer
 
 
 class ReviewListSerializer(serializers.ModelSerializer):
