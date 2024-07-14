@@ -113,7 +113,7 @@
 | total_price    | int                  |
 | past_medicines | **_past_medicines_** |
 
-| **_past_medicines_**           | Description    |
+| **_past_medicines_**(Many)     | Description    |
 | ------------------------------ | -------------- |
 | quantity                       | int            |
 | price_per_medicine_at_purchase | str            |
@@ -125,6 +125,9 @@
 | name           | str         |
 | company        | str         |
 | price          | int         |
+| average_rating | float       |
+| review_count   | int         |
+| remaining      | int         |
 
 ## Inventories
 
@@ -366,3 +369,23 @@
 | id         | int         |
 | title      | str         |
 | created_at | str         |
+
+## Favorites
+
+### `[GET] /favorites/` (나의 즐겨찾기) [✔]
+
+> Response
+
+| Data(Many) | Description    |
+| ---------- | -------------- |
+| medicine   | **_medicine_** |
+
+| **_medicine_** | Description |
+| -------------- | ----------- |
+| id             | int         |
+| name           | str         |
+| company        | str         |
+| price          | int         |
+| average_rating | float       |
+| review_count   | int         |
+| remaining      | int         |
