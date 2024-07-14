@@ -8,9 +8,11 @@ class ReviewAdmin(admin.ModelAdmin):
         "__str__",
         "created_at",
         "detail",
+        "rating",
     )
 
     list_filter = (
         "medicine",
         "created_at",
+        "rating",
     )

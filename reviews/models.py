@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 from common.models import CommonModel
 
 
@@ -23,11 +24,14 @@ class Review(CommonModel):
         auto_now_add=True,
         verbose_name="댓글 단 시각",
     )
-
-    def __str__(self) -> str:
-        return self.created_at.strftime(
-            "%Y년 %m월 %d일 %H시 %M분 %S초",
-        )
+    rating = models.PositiveIntegerField(
+        default=3,
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1),
+        ],
+        verbose_name="평점",
+    )
 
     def __str__(self) -> str:
         return f"{self.user.username}님의 리뷰 ({self.medicine.name})"

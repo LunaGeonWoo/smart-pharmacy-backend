@@ -4,6 +4,8 @@ from reviews.models import Review
 
 
 class MedicineTinySerializer(serializers.ModelSerializer):
+    average_rating = serializers.SerializerMethodField()
+    review_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Medicine
@@ -12,7 +14,16 @@ class MedicineTinySerializer(serializers.ModelSerializer):
             "name",
             "company",
             "price",
+            "average_rating",
+            "review_count",
+            "remaining",
         )
+
+    def get_average_rating(self, medicine):
+        return medicine.average_rating()
+
+    def get_review_count(self, medicine):
+        return medicine.review_count()
 
 
 class MedicineDetailSerializer(serializers.ModelSerializer):

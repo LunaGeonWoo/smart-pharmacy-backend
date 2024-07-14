@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.db import transaction
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -58,20 +58,28 @@ class InventoriesPurchase(APIView):
     def post(self, request):
         my_inventories = Inventory.objects.filter(owner=request.user)
         if my_inventories:
-            receipt = Receipt.objects.create(owner=request.user)
-            for my_inventory in my_inventories:
-                receipt.past_medicines.add(
-                    PastMedicine.objects.create(
-                        receipt=receipt,
-                        medicine=my_inventory.medicine,
-                        quantity=my_inventory.quantity,
-                        price_per_medicine_at_purchase=my_inventory.medicine.price,
-                    )
-                )
-                my_inventory.delete()
-            return Response(status=status.HTTP_200_OK)
+            try:
+                with transaction.atomic():
+                    receipt = Receipt.objects.create(owner=request.user)
+                    for my_inventory in my_inventories:
+                        medicine = my_inventory.medicine
+                        medicine.remaining -= my_inventory.quantity
+                        medicine.save()
+
+                        receipt.past_medicines.add(
+                            PastMedicine.objects.create(
+                                receipt=receipt,
+                                medicine=my_inventory.medicine,
+                                quantity=my_inventory.quantity,
+                                price_per_medicine_at_purchase=my_inventory.medicine.price,
+                            )
+                        )
+                        my_inventory.delete()
+                return Response(status=status.HTTP_200_OK)
+            except Exception:
+                return Response(status=status.HTTP_204_NO_CONTENT)
         else:
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class InventoryDetail(APIView):

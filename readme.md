@@ -182,12 +182,13 @@
 
 > Response
 
-**_if empty_** You can receive `HTTP  OK`
-**_if not empty_** You can receive `HTTP 200 OK`
+**_인벤토리 비어있으면_** You can receive `HTTP 400 BAD REQUEST`<br>
+**_재고가 없으면_** You can receive `HTTP 204 NO CONTENT`<br>
+**_통과_** You can receive `HTTP 200 OK`
 
 ## Medicines
 
-### `[GET] /medicines/` [✔]
+### `[GET] /medicines/` [✔] 
 
 > Request
 
@@ -198,12 +199,15 @@
 
 > Response
 
-| Data(Many) | Description |
-| ---------- | ----------- |
-| id         | int         |
-| name       | str         |
-| company    | str         |
-| price      | int         |
+| Data(Many)     | Description           |
+| -------------- | --------------------- |
+| id             | int                   |
+| name           | str                   |
+| company        | str                   |
+| price          | int                   |
+| average_rating | float (소숫점 첫번쨰) |
+| review_count   | int                   |
+| remaining      | int                   |
 
 ### `[GET] /medicines/1/` [✔]
 
