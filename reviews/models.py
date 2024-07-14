@@ -25,7 +25,6 @@ class Review(CommonModel):
         verbose_name="댓글 단 시각",
     )
     rating = models.PositiveIntegerField(
-        default=3,
         validators=[
             MaxValueValidator(5),
             MinValueValidator(1),

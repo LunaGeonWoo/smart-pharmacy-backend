@@ -188,7 +188,7 @@
 
 ## Medicines
 
-### `[GET] /medicines/` [✔] 
+### `[GET] /medicines/` [✔]
 
 > Request
 
@@ -237,6 +237,7 @@
 | Data   | Description |
 | ------ | ----------- |
 | detail | str         |
+| rating | int (1~5)   |
 
 | _Params_ | Description        |
 | -------- | ------------------ |
@@ -244,13 +245,14 @@
 
 > Response
 
-| Data(Many) | Description |
-| ---------- | ----------- |
-| id         | int         |
-| updated_at | str         |
-| created_at | str         |
-| detail     | str         |
-| user       | **_user_**  |
+| Data(Many) | Description        |
+| ---------- | ------------------ |
+| id         | int                |
+| updated_at | str                |
+| created_at | str                |
+| detail     | str                |
+| rating     | float(소수점 첫째) |
+| user       | **_user_**         |
 
 | **_user_** | Description |
 | ---------- | ----------- |
