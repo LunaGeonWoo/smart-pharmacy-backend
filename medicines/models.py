@@ -1,7 +1,6 @@
 from django.db import models
 from common.models import CommonModel
 from django.core import validators
-import random
 
 
 class Medicine(CommonModel):

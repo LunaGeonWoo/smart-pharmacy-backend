@@ -60,7 +60,10 @@ class MedicineDetail(APIView):
 
     def get(self, request, pk):
         medicine = self.get_object(pk)
-        serializer = MedicineDetailSerializer(medicine)
+        serializer = MedicineDetailSerializer(
+            medicine,
+            context={"request": request},
+        )
         return Response(serializer.data)
 
 

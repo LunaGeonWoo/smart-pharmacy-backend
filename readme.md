@@ -232,6 +232,9 @@
 | side_effect     | str         |
 | how_to_store    | str         |
 | price           | int         |
+| average_rating  | float       |
+| review_count    | int         |
+| is_favorite     | boolean     |
 
 ### `[GET POST] /medicines/1/reviews/` [✔]
 
