@@ -1,0 +1,11 @@
+import pandas as pd
+from medicines.models import Medicine
+
+# Load the CSV file
+df = pd.read_csv("crawling_imgs/image_sources.csv")
+
+# Iterate over the medicines and update the img_url
+for index, medicine in enumerate(Medicine.objects.all()):
+    if index < len(df):
+        medicine.img_url = df.iloc[index]["img_src"]
+        medicine.save()

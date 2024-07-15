@@ -67,6 +67,9 @@ class Medicine(CommonModel):
         validators=[validators.MinValueValidator(0)],
         verbose_name="개수",
     )
+    img_url = models.URLField(
+        blank=True,
+    )
 
     def __str__(self) -> str:
         return self.name

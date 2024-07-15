@@ -13,6 +13,7 @@ class MedicineTinySerializer(serializers.ModelSerializer):
             "id",
             "name",
             "company",
+            "img_url",
             "price",
             "average_rating",
             "review_count",

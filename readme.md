@@ -128,6 +128,7 @@
 | average_rating | float       |
 | review_count   | int         |
 | remaining      | int         |
+| img_url        | str         |
 
 ## Inventories
 
@@ -156,7 +157,11 @@
 | id             | int         |
 | name           | str         |
 | company        | str         |
-| price          | int: >=0    |
+| price          | int         |
+| average_rating | float       |
+| review_count   | int         |
+| remaining      | int         |
+| img_url        | str         |
 
 ### `[PUT DELETE] /inventories/1/` [✔]
 
@@ -211,6 +216,7 @@
 | average_rating | float (소숫점 첫번쨰) |
 | review_count   | int                   |
 | remaining      | int                   |
+| img_url        | str                   |
 
 ### `[GET] /medicines/1/` [✔]
 
@@ -235,6 +241,7 @@
 | average_rating  | float       |
 | review_count    | int         |
 | is_favorite     | boolean     |
+| img_url         | str         |
 
 ### `[GET POST] /medicines/1/reviews/` [✔]
 
@@ -289,6 +296,7 @@
 | average_rating | float       |
 | review_count   | int         |
 | remaining      | int         |
+| img_url        | str         |
 
 ### `[PUT DELETE] /reviews/1/` [✔]
 
@@ -392,3 +400,4 @@
 | average_rating | float       |
 | review_count   | int         |
 | remaining      | int         |
+| img_url        | str         |
