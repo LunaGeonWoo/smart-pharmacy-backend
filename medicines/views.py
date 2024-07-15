@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.conf import settings
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, ParseError
 from rest_framework import status
@@ -9,6 +9,7 @@ from .serializers import MedicineTinySerializer, MedicineDetailSerializer
 from .models import Medicine
 from reviews.serializers import ReviewListSerializer
 from reviews.models import Review
+from favorites.models import Favorite
 
 
 class Medicines(APIView):
@@ -105,3 +106,24 @@ class MedicineReviews(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+
+
+class MedicineFavorite(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return Medicine.objects.get(pk=pk)
+        except Medicine.DoesNotExist:
+            raise NotFound
+
+    def post(self, request, pk):
+        medicine = self.get_object(pk)
+        if Favorite.objects.filter(user=request.user, medicine=medicine).exists():
+            favorite = Favorite.objects.get(user=request.user, medicine=medicine)
+            favorite.delete()
+            return Response(status=status.HTTP_202_ACCEPTED)
+        else:
+            Favorite.objects.create(user=request.user, medicine=medicine)
+            return Response(status=status.HTTP_201_CREATED)

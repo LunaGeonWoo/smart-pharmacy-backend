@@ -272,6 +272,13 @@
 | id         | int         |
 | username   | str         |
 
+### `[POST] /medicines/1/favorite/` [✔]
+
+> Response
+
+**_즐겨찾기 추가됐으면_** You can receive `HTTP 201 CREATED`<br>
+**_즐겨찾기 제거됐으면_** You can receive `HTTP 202 ACCEPTED`
+
 ## Reviews
 
 ### `[GET] /reviews/` (내가 단 리뷰들) [✔]
