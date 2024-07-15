@@ -77,7 +77,7 @@ class Medicine(CommonModel):
     def average_rating(self):
         count = self.reviews.count()
         if count == 0:
-            return 0
+            return 0.0
         else:
             total_rating = 0
             for review in self.reviews.all().values("rating"):
