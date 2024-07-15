@@ -41,12 +41,18 @@ class Inventories(APIView):
                     {"medicine": ["이 필드는 필수 항목입니다."]},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-            medicine = self.get_medicine(medicine_pk)
-            inventory = serializer.save(
-                medicine=medicine,
-                owner=request.user,
-            )
-            serializer = InventorySerializer(inventory)
+            medicine = self.get_medicine(pk=medicine_pk)
+            if Inventory.objects.filter(owner=request.user, medicine=medicine).exists():
+                inventory = Inventory.objects.get(owner=request.user, medicine=medicine)
+                inventory.quantity += serializer.data["quantity"]
+                inventory.save()
+                serializer = InventorySerializer(inventory)
+            else:
+                inventory = serializer.save(
+                    medicine=medicine,
+                    owner=request.user,
+                )
+                serializer = InventorySerializer(inventory)
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
