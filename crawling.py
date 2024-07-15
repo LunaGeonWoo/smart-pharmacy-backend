@@ -71,6 +71,10 @@ for i, name in enumerate(df["제품명"][start_index:], start=start_index):
         results_df.to_csv(
             f"crawling_imgs/image_sources_checkpoint_{i + 1}.csv", index=False
         )
+        # 이전 체크포인트 파일 삭제
+        if (i + 1) > 50:
+            os.remove(f"crawling_imgs/image_sources_checkpoint_{i + 1 - 50}.csv")
+    print(f"{(i + 1) % 50} / 50")
     time.sleep(random.random())
 
 # 결과 저장

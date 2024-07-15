@@ -33,7 +33,7 @@ checkpoint_files = sorted(
     [
         f
         for f in os.listdir("crawling_imgs")
-        if f.startswith("image_sources_checkpoint_")
+        if f.startswith("image_sources_checkpoint_bot_")
     ]
 )
 if checkpoint_files:
@@ -70,17 +70,17 @@ for i, name in enumerate(df["제품명"][start_index:], start=start_index):
     if (i + 1) % 50 == 0:
         results_df = pd.DataFrame(results)
         results_df.to_csv(
-            f"crawling_imgs/image_sources_checkpoint_{i + 1}.csv", index=False
+            f"crawling_imgs/image_sources_checkpoint_bot_{i + 1}.csv", index=False
         )
         # 이전 체크포인트 파일 삭제
         if (i + 1) > 50:
-            os.remove(f"crawling_imgs/image_sources_checkpoint_{i + 1 - 50}.csv")
+            os.remove(f"crawling_imgs/image_sources_checkpoint_bot_{i + 1 - 50}.csv")
     print(f"{(i + 1) % 50} / 50")
     time.sleep(random.random() * 1.2)
 
 # 결과 저장
 results_df = pd.DataFrame(results)
-results_df.to_csv("crawling_imgs/image_sources.csv", index=False)
+results_df.to_csv("crawling_imgs/image_sources_bot.csv", index=False)
 
 # 드라이버 종료
 driver.quit()
