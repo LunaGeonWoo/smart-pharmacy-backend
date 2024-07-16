@@ -7,8 +7,6 @@ from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
-import time
-import random
 
 # 디렉토리 생성
 os.makedirs("crawling_imgs", exist_ok=True)
@@ -46,7 +44,6 @@ else:
 for i, name in enumerate(df["제품명"][start_index:], start=start_index):
     driver.get("https://www.google.com/imghp?hl=ko")
     search_box = driver.find_element(By.NAME, "q")
-    time.sleep(random.random())
     search_box.send_keys(name)
 
     try:
@@ -62,9 +59,22 @@ for i, name in enumerate(df["제품명"][start_index:], start=start_index):
     divs = driver.find_elements(By.CLASS_NAME, "mNsIhb")
 
     if divs:
-        img_tag = divs[0].find_element(By.TAG_NAME, "img")
-        img_src = img_tag.get_attribute("src")
-        results.append({"index": i, "img_src": img_src})
+        # 첫 번째 이미지를 클릭
+        divs[0].click()
+        # 기다려서 이미지가 로드되도록 함
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, 'img[jsname="JuXqh"], img[jsname="kn3ccd"]')
+            )
+        )
+
+        # jsname이 "JuXqh" 또는 "kn3ccd"인 이미지 src 가져오기
+        img_tags = driver.find_elements(
+            By.CSS_SELECTOR, 'img[jsname="JuXqh"], img[jsname="kn3ccd"]'
+        )
+        if img_tags:
+            img_src = img_tags[0].get_attribute("src")
+            results.append({"index": i, "img_src": img_src})
 
     if (i + 1) % 50 == 0:
         results_df = pd.DataFrame(results)
@@ -75,7 +85,6 @@ for i, name in enumerate(df["제품명"][start_index:], start=start_index):
         if (i + 1) > 50:
             os.remove(f"crawling_imgs/image_sources_checkpoint_{i + 1 - 50}.csv")
     print(f"{(i + 1) % 50} / 50")
-    time.sleep(random.random())
 
 # 결과 저장
 results_df = pd.DataFrame(results)
