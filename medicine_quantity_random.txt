@@ -1,0 +1,5 @@
+from medicines.models import Medicine
+import random
+for medicine in Medicine.objects.all():
+    medicine.remaining = random.randint(3, 10)
+    medicine.save()
